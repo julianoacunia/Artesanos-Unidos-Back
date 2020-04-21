@@ -46,10 +46,18 @@ const upsertProduct = (req, res) => {
     })
 }
 
+// Remove product method
+const removeProduct = (req, res) => {
+    Product.findOneAndDelete({ _id: req.params.id } ,(err, doc) => {
+        if (err) return res.status(500).send(err)
+        res.status(200).send(doc)
+    })
+}
 
 module.exports = {
     getAll,
     getById,
     insertProduct,
-    upsertProduct
+    upsertProduct,
+    removeProduct
 }
