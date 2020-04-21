@@ -8,6 +8,17 @@ const getAll = (req, res) => {
     })
 }
 
+// Get id product method
+const getById = (req, res) => {
+    Product.findById(req.params.id, (err, products) => {
+        if (err)
+        res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
+        res.send(products)
+    })
+}
+
+
 module.exports = {
-    getAll
+    getAll,
+    getById
 }
