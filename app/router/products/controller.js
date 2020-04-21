@@ -21,7 +21,7 @@ const getById = (req, res) => {
 const insertProduct = (req, res) => {
     console.log(req.body)
     const product = new Product ({
-        _id: req.body.id,
+        _id: req.body._id,
         tittle: req.body.tittle,
         description: req.body.description,
         price: req.body.price,

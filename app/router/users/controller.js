@@ -14,7 +14,7 @@ const getAll = (req, res) => {
 const insertUser = (req, res) => {
     const user = new User ({
         name: req.body.name,
-        lastname: req.body.lastname,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: sha256(req.body.password)
     })
