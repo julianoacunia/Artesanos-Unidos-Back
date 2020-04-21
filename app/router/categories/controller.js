@@ -20,7 +20,17 @@ const insertCategorie = (req, res) => {
     })
 }
 
+// Remove categorie method
+const removeCategorie = (req, res) => {
+    Categorie.findOneAndDelete({ _id: req.params.id } ,(err, doc) => {
+        if (err) return res.status(500).send(err)
+        res.status(200).send(doc)
+    })
+}
+
+
 module.exports = {
     getAll,
-    insertCategorie
+    insertCategorie,
+    removeCategorie
 }
