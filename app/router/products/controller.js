@@ -34,9 +34,22 @@ const insertProduct = (req, res) => {
     })
 }
 
+// Upsert product method 
+const upsertProduct = (req, res) => {
+    Product.updateOne({ _id: req.params.id  }, { ...req.body }, err => {
+        if (err)
+        res.send({
+          msg: `Cant't upsert the product ${req.params.id}`,
+          error: err
+        })
+        res.send({ msg: 'Product upserted' })
+    })
+}
+
 
 module.exports = {
     getAll,
     getById,
-    insertProduct
+    insertProduct,
+    upsertProduct
 }
