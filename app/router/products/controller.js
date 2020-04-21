@@ -17,8 +17,26 @@ const getById = (req, res) => {
     })
 }
 
+// Insert product method
+const insertProduct = (req, res) => {
+    console.log(req.body)
+    const product = new Product ({
+        _id: req.body.id,
+        tittle: req.body.tittle,
+        description: req.body.description,
+        price: req.body.price,
+        stock: req.body.stock,
+        img: req.body.img
+    })
+    product.save(err => {
+        if (err) res.send({ msg: 'Cant`t save the product', error: err })
+        res.send({ msg: 'product saved', data: product })
+    })
+}
+
 
 module.exports = {
     getAll,
-    getById
+    getById,
+    insertProduct
 }

@@ -26,11 +26,6 @@ const ProductSchema = new Schema (
         stock: {
             type: Number,
             required: true
-        },
-        category: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'categories',
-            required: true
         }
     },
     { versionKey: false}
