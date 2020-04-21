@@ -47,8 +47,23 @@ const signIn = (req, res) => {
     )
 }
 
+//  SignUp user method
+const signUp = (req, res) => {
+    const user = new User({
+      name: req.body.name,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: sha256(req.body.password)
+    })
+    user.save(err => {
+      if (err) res.status(500).send({ msg: `Can't save the user: ${err}` })
+      res.status(200).json({ token: functions.createToken(user) })
+    })
+}
+
 module.exports = {
     getAll,
     insertUser,
-    signIn
+    signIn,
+    signUp
 }
