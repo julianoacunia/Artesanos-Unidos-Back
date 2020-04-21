@@ -8,6 +8,19 @@ const getAll = (req, res) => {
     })
 }
 
+// Insert categorie method
+const insertCategorie = (req, res) => {
+    const categorie = new Categorie ({
+        name: req.body.name,
+        description: req.body.description
+    })
+    categorie.save(err => {
+        if (err) res.send({ msg: 'Cant`t save the categorie', error: err })
+        res.send({ msg: 'categorie saved', data: categorie })
+    })
+}
+
 module.exports = {
-    getAll
+    getAll,
+    insertCategorie
 }
