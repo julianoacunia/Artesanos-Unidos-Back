@@ -61,9 +61,19 @@ const signUp = (req, res) => {
     })
 }
 
+//  Remove user method
+const removeUser= (req, res) => {
+    User.deleteOne({ _id: req.params.id }, err => {
+      if (err)
+        res.send({ msg: `Cant't delete the user ${req.params.id}`, error: err })
+      res.send('User deleted')
+    })
+}
+
 module.exports = {
     getAll,
     insertUser,
     signIn,
-    signUp
+    signUp,
+    removeUser
 }
