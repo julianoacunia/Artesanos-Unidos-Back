@@ -53,7 +53,8 @@ const signUp = (req, res) => {
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: sha256(req.body.password)
+      password: sha256(req.body.password),
+      isAdmin: req.body.isAdmin
     })
     user.save(err => {
       if (err) res.status(500).send({ msg: `Can't save the user: ${err}` })
