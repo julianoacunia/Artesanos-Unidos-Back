@@ -12,11 +12,13 @@ const getAll = (req, res) => {
 
 // Insert user method
 const insertUser = (req, res) => {
+    console.log(req.body)
     const user = new User ({
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: sha256(req.body.password)
+        password: sha256(req.body.password),
+        isAdmin: req.body.isAdmin
     })
     user.save(err => {
         if (err) res.send({ msg: 'Cant`t save the user', error: err })
@@ -59,6 +61,7 @@ const signUp = (req, res) => {
     user.save(err => {
       if (err) res.status(500).send({ msg: `Can't save the user: ${err}` })
       res.status(200).json({ token: functions.createToken(user) })
+      console.log(user)
     })
 }
 

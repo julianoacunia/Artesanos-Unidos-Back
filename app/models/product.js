@@ -3,10 +3,6 @@ const Schema = mongoose.Schema
 
 const ProductSchema = new Schema (
     {
-        _id: {
-            type: Number,
-            required: true
-        },
         tittle: {
             type:  String,
             required: true
@@ -26,9 +22,14 @@ const ProductSchema = new Schema (
         stock: {
             type: Number,
             required: true
+        },
+        id_proveedor: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'users',
+            required: true
         }
     },
-    { versionKey: false}
+    {versionKey: false}
 )
 
 const Product = mongoose.model('products', ProductSchema)
