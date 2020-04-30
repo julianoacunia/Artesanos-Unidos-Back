@@ -8,10 +8,20 @@ const getAll = (req, res) => {
     })
 }
 
-// Get id product method
+// Get proveedor id product method
 const getByIdProveedor = (req, res) => {
     console.log(req.params)
     Product.find( {id_proveedor:req.params.id} , (err, products) => {
+        if (err)
+        res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
+        res.send(products)
+    })
+}
+
+// Get category id product method
+const getByIdCategory = (req, res) => {
+    console.log(req.params)
+    Product.find( {id_category:req.params.id} , (err, products) => {
         if (err)
         res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
         res.send(products)
@@ -59,6 +69,7 @@ const removeProduct = (req, res) => {
 
 module.exports = {
     getAll,
+    getByIdCategory,
     getByIdProveedor,
     insertProduct,
     upsertProduct,
