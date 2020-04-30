@@ -27,6 +27,11 @@ const ProductSchema = new Schema (
             type: mongoose.Schema.Types.ObjectId,
             ref:'users',
             required: true
+        },
+        id_category: {
+            type: Schema.Types.ObjectId,
+            ref:'categories',
+            required: true
         }
     },
     {versionKey: false}

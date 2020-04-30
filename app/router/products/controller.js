@@ -28,7 +28,8 @@ const insertProduct = (req, res) => {
         price: req.body.price,
         stock: req.body.stock,
         img: req.body.img,
-        id_proveedor: req.body.userId
+        id_proveedor: req.body.userId,
+        id_category: req.body.categoryId
     })
     product.save(err => {
         if (err) res.send({ msg: 'Cant`t save the product', error: err })

@@ -5,11 +5,13 @@ const getAll = (req, res) => {
     Categorie.find({},(err, categories) => {
         if (err) res.send({ msg: 'can`t get the categorie list', error: err })
         res.send(categories)
+        console.log(categories)
     })
 }
 
 // Insert categorie method
 const insertCategorie = (req, res) => {
+    console.log(req.body)
     const categorie = new Categorie ({
         name: req.body.name,
         description: req.body.description
