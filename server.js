@@ -12,6 +12,8 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
+const AuthToken = require('./app/middleware/authToken')
+
 const mongoDBURL = require('./dbconfig/connectionstring.config')
 
 mongoose
@@ -32,7 +34,6 @@ let allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain)
 app.get('*')
-
 app.use('/api', router)
 
 app.listen(port, () => {

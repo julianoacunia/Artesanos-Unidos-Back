@@ -19,9 +19,13 @@ const UserSchema = new Schema (
             type: String,
             required: true
         },
-        isAdmin: {
-            type: Boolean,
-            required: true
+        role: {
+            type: String,
+            default: 'regular',
+            enum: [
+                'regular',
+                'admin'
+            ]
         }
     },
     { versionKey: false }

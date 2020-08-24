@@ -10,7 +10,6 @@ const getAll = (req, res) => {
 
 // Get proveedor id product method
 const getByIdProveedor = (req, res) => {
-    console.log(req.params)
     Product.find( {id_proveedor:req.params.id} , (err, products) => {
         if (err)
         res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
@@ -19,11 +18,12 @@ const getByIdProveedor = (req, res) => {
 }
 
 // Get category id product method
-const getByIdCategory = (req, res) => {
+const getByNameCategory = (req, res) => {
     console.log(req.params)
-    Product.find( {id_category:req.params.id} , (err, products) => {
+    Product.find( {category_name:req.params.category_name} , (err, products) => {
+        console.log(err)
         if (err)
-        res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
+        res.send({ msg: `Cant't get the product ${req.params.name}`, error: err })
         res.send(products)
     })
 }
@@ -39,7 +39,7 @@ const insertProduct = (req, res) => {
         stock: req.body.stock,
         img: req.body.img,
         id_proveedor: req.body.userId,
-        id_category: req.body.categoryId
+        category_name: req.body.category_name
     })
     product.save(err => {
         if (err) res.send({ msg: 'Cant`t save the product', error: err })
@@ -69,7 +69,6 @@ const removeProduct = (req, res) => {
 
 module.exports = {
     getAll,
-    getByIdCategory,
     getByIdProveedor,
     insertProduct,
     upsertProduct,
