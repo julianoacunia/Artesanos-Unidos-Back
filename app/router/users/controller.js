@@ -16,6 +16,7 @@ const insertUser = (req, res) => {
     const user = new User ({
         name: req.body.name,
         lastName: req.body.lastName,
+        dni: req.body.dni,
         email: req.body.email,
         password: sha256(req.body.password),
         isAdmin: req.body.isAdmin

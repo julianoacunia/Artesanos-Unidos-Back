@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const router = require('./app/router')
+const path = require('path')
 const cors = require('cors')
 
 const app = express()
@@ -12,9 +13,12 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
+// static files
+app.use(express.static(path.join(__dirname, './app/upload')))
 const AuthToken = require('./app/middleware/authToken')
 
 const mongoDBURL = require('./dbconfig/connectionstring.config')
+const { patch } = require('./app/router')
 
 mongoose
   .connect(mongoDBURL.url, { useNewUrlParser: true, useUnifiedTopology: true })

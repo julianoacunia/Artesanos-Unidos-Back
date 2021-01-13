@@ -7,7 +7,6 @@ const getAll = (req, res) => {
         res.send(products)
     })
 }
-
 // Get proveedor id product method
 const getByIdProveedor = (req, res) => {
     Product.find( {id_proveedor:req.params.id} , (err, products) => {
