@@ -1,5 +1,6 @@
 const mongoose = require ('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs')
 
 const UserSchema = new Schema (
     {
@@ -23,17 +24,24 @@ const UserSchema = new Schema (
             type: String,
             required: true
         },
-        role: {
-            type: String,
-            default: 'regular',
-            enum: [
-                'regular',
-                'admin'
-            ]
+        roles: {
+            ref: 'roles',
+            type: Schema.Types.ObjectId,
         }
     },
-    { versionKey: false }
+    {
+        versionKey: false,
+        timestamps: true,
+    }
 )
+
+UserSchema.statics.encryptPassword = async (password) => {
+    return await bcrypt.hash(password,10);
+}
+
+UserSchema.statics.comparePassword = async (password, receivedPassword) => {
+    return await bcrypt.compare(password, receivedPassword)
+}
 
 const User = mongoose.model('users', UserSchema)
 

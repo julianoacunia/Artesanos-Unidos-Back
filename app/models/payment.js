@@ -8,7 +8,10 @@ const PaymentSchema = new Schema (
             required: true
         }
     },
-    {versionKey: false}
+    {
+        versionKey: false,
+        timestamps: true,
+    }
 )
 
 const Payment = mongoose.model('payment', PaymentSchema)

@@ -2,7 +2,7 @@ const functions = require('../functions')
 
 function confirmAuth(req, res, next) {
     if(!req.headers.authorization){
-        return res 
+        return res
         .status(403)
         .send({message: 'authorization denied'})
     }

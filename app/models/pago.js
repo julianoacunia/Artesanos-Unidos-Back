@@ -33,7 +33,10 @@ const PaymentSchema = new Schema (
             required: true
         }
     },
-    {versionKey: false}
+    {
+        versionKey: false,
+        timestamps: true,
+    }
 )
 
 const Product = mongoose.model('products', ProductSchema)

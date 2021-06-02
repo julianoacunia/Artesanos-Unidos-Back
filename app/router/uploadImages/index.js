@@ -7,7 +7,7 @@ const uploader = multer({storage})
 const router = express.Router()
 
 router.post('/upload', uploader.single('file'), async(req, res) => {
-    const { file, body } = req 
+    const { file, body } = req
     if(file && body) {
         const newImage = new Image({
             fileName: body.name,
@@ -20,7 +20,7 @@ router.post('/upload', uploader.single('file'), async(req, res) => {
     }
 })
 
-// ruta que el cliente desde react va a pedir 
+// ruta que el cliente desde react va a pedir
 router.get('/download', async(req, res) => {
     const images = await Image.find()
     res.json(images)

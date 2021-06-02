@@ -4,14 +4,22 @@ const mongoose = require('mongoose')
 const router = require('./app/router')
 const path = require('path')
 const cors = require('cors')
+const morgan = require('morgan');
+const roles = require('./app/libs/initialSetup');
 
 const app = express()
 const port = 5000
+roles.createRoles()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(morgan('dev'))
 
 app.use(cors())
+
+app.get('/', (req, res) => {
+  res.json('Bienvenido')
+})
 
 // static files
 app.use(express.static(path.join(__dirname, './app/upload')))

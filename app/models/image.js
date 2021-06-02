@@ -15,7 +15,11 @@ const ImageSchema = new Schema ({
         default: Date.now(),
         require: true
     }
-})
+    },
+    {
+        timestamps: true,
+    }
+)
 
 const Image = mongoose.model('Image', ImageSchema)
 module.exports = Image
