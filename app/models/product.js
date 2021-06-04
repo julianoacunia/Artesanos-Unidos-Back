@@ -15,20 +15,19 @@ const ProductSchema = new Schema(
       type: Number,
       required: true
     },
-    // img: {
-    //   key: String,
-    //   url: String,
-    //   required: true,
-    // },
+    img: {
+      type: String,
+      required: true,
+    },
     stock: {
       type: Number,
       required: true
     },
-    providerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'users',
-      required: true
-    },
+    // providerId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'users',
+    //   required: true
+    // },
     categoryName: {
       type: String,
       required: true

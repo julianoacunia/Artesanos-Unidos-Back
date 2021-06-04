@@ -19,9 +19,7 @@ const getByIdProveedor = (req, res) => {
 
 // Get category id product method
 const getByNameCategory = (req, res) => {
-  console.log(req.params)
   Product.find({ category_name: req.params.category_name }, (err, products) => {
-    console.log(err)
     if (err)
       res.send({ msg: `Cant't get the product ${req.params.name}`, error: err })
     res.send(products)
@@ -30,37 +28,14 @@ const getByNameCategory = (req, res) => {
 
 // Insert product method
 const insertProduct = async (req, res) => {
-  // let images
-  // const s3 = new S3()
-  // const uploadImages = []
-  // for (let index = 1; index <= 4; index++) {
-  //   const image = req.body[`image${index}`]
-  //   if (image) {
-  //     uploadImages.push(s3.uploadFiles(image, process.env.AWS_BUCKET_PRODUCTS_IMAGES))
-  //   }
-  // }
-
-  // const imagesFiles = await Promise.all(uploadImages)
-
-  // images = imagesFiles.reduce((acc, item, index) => {
-  //   if (item) {
-  //     acc[`image${index + 1}`] = {
-  //       key: item.key,
-  //       url: item.Location
-  //     }
-  //   }
-  //   return acc
-  // }, {})
   const product = new Product({
-    _id: req.body.id,
-    tittle: req.body.tittle,
+    title: req.body.title,
     description: req.body.description,
     price: req.body.price,
     stock: req.body.stock,
-    // ...images,
-    images: req.body.images,
-    id_proveedor: req.body.userId,
-    category_name: req.body.category_name
+    img: req.body.img,
+    // providerId: req.body.userId,
+    categoryName: req.body.categoryName
   })
   product.save(err => {
     if (err) res.send({ msg: 'Cant`t save the product', error: err })

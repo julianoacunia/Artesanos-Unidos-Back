@@ -19,11 +19,10 @@ const insertPayment = (req, res) => {
   }
   mercadopago.preferences.create(preference)
     .then(function (response) {
-      console.log('RESPONSE', response);
       res.send({ id: response.body.id })
     })
     .catch(function (error) {
-      console.log(error);
+      res.send({ error });
     });
 
 }

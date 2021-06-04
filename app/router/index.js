@@ -7,7 +7,7 @@ const auth = require('./auth')
 
 const router = express.Router()
 
-router.use('/public/product', express.static('app/public/product'))
+router.use('/public/images', express.static('app/public/images'))
 
 router.use('/products', product)
 router.use('/users', user)

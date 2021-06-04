@@ -1,8 +1,8 @@
-const mongoose = require ('mongoose')
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs')
 
-const UserSchema = new Schema (
+const UserSchema = new Schema(
     {
         name: {
             type: String,
@@ -24,9 +24,13 @@ const UserSchema = new Schema (
             type: String,
             required: true
         },
-        roles: {
-            ref: 'roles',
-            type: Schema.Types.ObjectId,
+        // roles: {
+        //     ref: 'roles',
+        //     type: Schema.Types.ObjectId,
+        // }
+        category: {
+            type: String,
+            required: true,
         }
     },
     {
@@ -36,7 +40,7 @@ const UserSchema = new Schema (
 )
 
 UserSchema.statics.encryptPassword = async (password) => {
-    return await bcrypt.hash(password,10);
+    return await bcrypt.hash(password, 10);
 }
 
 UserSchema.statics.comparePassword = async (password, receivedPassword) => {

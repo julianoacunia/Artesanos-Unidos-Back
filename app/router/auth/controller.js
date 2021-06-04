@@ -5,7 +5,7 @@ const config = require('../../../config')
 const Roles = require('../../models/role')
 
 const signIn = async (req, res) => {
-  const response = await User.findOne({ email: req.body.email }).populate('roles')
+  const response = await User.findOne({ email: req.body.email })
 
   if (!response) {
     res.status(400).send('El usuario no existe')
@@ -23,14 +23,14 @@ const signIn = async (req, res) => {
 
 const signUp = async (req, res) => {
   try {
-    const { name, lastName, dni, email, password, roles } = req.body;
+    const { name, lastName, dni, email, password, category } = req.body;
     const newUser = new User({
       name,
       lastName,
       dni,
       email,
       password: sha256(password),
-      roles
+      category
     })
 
     // if (email) {
@@ -41,14 +41,14 @@ const signUp = async (req, res) => {
     //     }
     //   })
     // }
-    if (roles) {
-      const foundRoles = await Roles.find({ name: roles })
-      newUser.roles = foundRoles.map(item => item._id)
-    }
-    else {
-      const role = await roles.findOne({ name: "artesano" })
-      newUser.roles = [role._id]
-    }
+    // if (roles) {
+    //   const foundRoles = await Roles.find({ name: roles })
+    //   newUser.roles = foundRoles.map(item => item._id)
+    // }
+    // else {
+    //   const role = await roles.findOne({ name: "artesano" })
+    //   newUser.roles = [role._id]
+    // }
     await newUser.save()
     res.status(200).send('Se ha registrado correctamente')
   }
