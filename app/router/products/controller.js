@@ -9,8 +9,8 @@ const getAll = (req, res) => {
   })
 }
 // Get proveedor id product method
-const getByIdProveedor = (req, res) => {
-  Product.find({ id_proveedor: req.params.id }, (err, products) => {
+const getProductByProviderId = (req, res) => {
+  Product.find({ providerId: req.params.id }, (err, products) => {
     if (err)
       res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
     res.send(products)
@@ -34,7 +34,7 @@ const insertProduct = async (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     img: req.body.img,
-    // providerId: req.body.userId,
+    providerId: req.body.providerId,
     categoryName: req.body.categoryName
   })
   product.save(err => {
@@ -65,7 +65,7 @@ const removeProduct = (req, res) => {
 
 module.exports = {
   getAll,
-  getByIdProveedor,
+  getProductByProviderId,
   insertProduct,
   upsertProduct,
   removeProduct

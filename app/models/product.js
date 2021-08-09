@@ -23,11 +23,11 @@ const ProductSchema = new Schema(
       type: Number,
       required: true
     },
-    // providerId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'users',
-    //   required: true
-    // },
+    providerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users',
+      required: true
+    },
     categoryName: {
       type: String,
       required: true

@@ -4,6 +4,7 @@ const user = require('./users')
 const categorie = require('./categories')
 const payment = require('./payment')
 const auth = require('./auth')
+const order = require('./orders')
 
 const router = express.Router()
 
@@ -15,5 +16,6 @@ router.use('/categories', categorie)
 router.use('/payment', payment)
 router.use('/', require('../router/uploadImages'))
 router.use('/auth', auth)
+router.use('/order', order)
 
 module.exports = router
