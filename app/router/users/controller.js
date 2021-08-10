@@ -1,6 +1,8 @@
 const User = require('../../models/user')
 const sha256 = require('sha256')
 const functions = require('../../functions')
+const jtw = require('jsonwebtoken');
+const nodemailer = require("nodemailer");
 
 // Get all user method
 const getAll = (req, res) => {
@@ -84,10 +86,49 @@ const auth = (req, res) => {
   });
 };
 
+const forgotPassword = async (req, res) => {
+  const { dni } = req.body;
+  const client = await User.findOne({ dni });
+  if (!client) {
+    res.send({ msg: 'Client not found' });
+  }
+
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: 'julianoacunia@gmail.com', // generated ethereal user
+      pass: 'cjlntysxlgmeeemo', // generated ethereal password
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Soporte de Artesanos Unidos" <artesanosunidos@soporte.com>', // sender address
+    to: `${client.email}`, // list of receivers
+    subject: "Recuperacion de contraseña", // Subject line
+    html: "<b>Su nueva contraseña es: 'Client1'. Atte: Soporte de Artesanos Unidos</b>", // html body
+  });
+
+  if (!info) {
+    res.send({ msg: 'No se pudo enviar el mail' })
+  }
+
+  const response = await User.findByIdAndUpdate(
+    { _id: client._id },
+    { password: sha256('Client1') },
+    { new: true }
+  );
+
+  res.send({ msg: "Se envio un mail a su casilla de correo", data: response })
+};
+
 module.exports = {
   getAll,
   insertUser,
   signIn,
   signUp,
-  removeUser
+  removeUser,
+  forgotPassword,
 }

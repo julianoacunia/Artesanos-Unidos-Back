@@ -4,7 +4,7 @@ const functions = require('../../functions/index')
 const auth = require('../../middleware/auth')
 
 const router = express.Router()
-const { getAll, insertUser, signIn, signUp, removeUser } = controller
+const { getAll, insertUser, signIn, signUp, removeUser, forgotPassword } = controller
 
 router.use(express.json())
 
@@ -13,6 +13,6 @@ router.post('/', insertUser)
 router.post('/signIn', signIn)
 router.post('/signUp', signUp)
 router.delete('/:id', removeUser)
-// router.get('/auth', auth)
+router.patch('/forgot-password', forgotPassword)
 
 module.exports = router
